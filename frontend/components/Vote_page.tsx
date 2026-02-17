@@ -26,7 +26,6 @@ export default function VotePage() {
   };
 
   const submitVote = async () => {
-    // 🔗 Smart contract call will go here (next step)
     console.log("Vote submitted for:", selectedCandidate?.name);
 
     setHasVoted(true);
