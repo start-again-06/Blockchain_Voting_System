@@ -1,34 +1,26 @@
 import { useState } from "react";
+import Navbar from "@/components/Navbar";
 import CandidateCard from "@/components/CandidateCard";
 import VoteModal from "@/components/VoteModal";
-import Navbar from "@/components/Navbar";
-
-interface Candidate {
-  id: number;
-  name: string;
-  party?: string;
-}
-
-const mockCandidates: Candidate[] = [
-  { id: 1, name: "Candidate A", party: "Independent" },
-  { id: 2, name: "Candidate B", party: "Progressive" },
-];
+import { useElection, Candidate } from "@/hooks/useElection";
 
 export default function VotePage() {
-  const [hasVoted, setHasVoted] = useState(false);
-  const [selectedCandidate, setSelectedCandidate] = useState<Candidate | null>(null);
+  const { candidates, hasVoted, vote, loading } = useElection();
+  const [selected, setSelected] = useState<Candidate | null>(null);
   const [showModal, setShowModal] = useState(false);
 
+  if (loading) {
+    return <p className="p-6">Loading election...</p>;
+  }
+
   const handleVoteClick = (candidate: Candidate) => {
-    if (hasVoted) return;
-    setSelectedCandidate(candidate);
+    setSelected(candidate);
     setShowModal(true);
   };
 
   const submitVote = async () => {
-    console.log("Vote submitted for:", selectedCandidate?.name);
-
-    setHasVoted(true);
+    if (!selected) return;
+    await vote(selected.id);
     setShowModal(false);
   };
 
@@ -38,24 +30,21 @@ export default function VotePage() {
 
       <main className="mx-auto max-w-5xl p-6">
         <h1 className="text-2xl font-semibold">Cast Your Vote</h1>
-        <p className="mt-2 text-sm text-gray-600">
-          You may vote only once. This action is irreversible.
-        </p>
 
         <div className="mt-6 grid gap-6 md:grid-cols-2">
-          {mockCandidates.map((candidate) => (
+          {candidates.map((c) => (
             <CandidateCard
-              key={candidate.id}
-              {...candidate}
+              key={c.id}
+              {...c}
               disabled={hasVoted}
-              onVote={() => handleVoteClick(candidate)}
+              onVote={() => handleVoteClick(c)}
             />
           ))}
         </div>
 
         <VoteModal
           isOpen={showModal}
-          candidateName={selectedCandidate?.name || ""}
+          candidateName={selected?.name || ""}
           onConfirm={submitVote}
           onClose={() => setShowModal(false)}
         />
