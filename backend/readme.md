@@ -61,6 +61,19 @@ The backend reduces direct blockchain load on the frontend and enables future ex
 
 The backend follows a service-oriented and event-driven architecture optimized for Web3 workloads.
 
+```mermaid
+flowchart TD
+    A[Frontend Requests] --> B[API Layer]
+    B --> C[Service Layer]
+    C --> D[Indexing Layer]
+    D --> E[Blockchain Layer (ethers.js / web3.js)]
+    D --> F[Database (Optional)]
+    B --> F
+    E -->|Smart Contract Events| D
+    F -->|Stored Data| B
+    C -->|Aggregated Results| B
+```
+
 **Core Layers**  
 - **API Layer:** REST endpoints exposed to frontend  
 - **Blockchain Layer:** ethers.js / web3.js contract interaction  
