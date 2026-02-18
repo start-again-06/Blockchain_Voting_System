@@ -49,9 +49,9 @@ The project emphasizes security, modularity, and extensibility, allowing future 
 
 ```mermaid
 flowchart TD
-    A[Frontend (React/TypeScript)] --> B[Backend (Node.js + Express)]
-    B --> C[Smart Contracts (Solidity, Hardhat)]
-    C --> D[Ethereum-compatible Blockchain (Local/Testnet/Mainnet)]
+    A[Frontend - React/TypeScript] --> B[Backend - Node.js + Express]
+    B --> C[Smart Contracts - Solidity, Hardhat]
+    C --> D[Ethereum-compatible Blockchain - Local/Testnet/Mainnet]
 ```
 
 ## Design Principles
