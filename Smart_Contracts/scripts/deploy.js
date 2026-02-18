@@ -1,15 +1,20 @@
 const hre = require("hardhat");
 
 async function main() {
-  const BookingContract = await hre.ethers.getContractFactory("BookingContract");
-  const bookingContract = await BookingContract.deploy();
-  await bookingContract.waitForDeployment();
+  const Voting = await hre.ethers.getContractFactory("VotingContract");
 
-  console.log("BookingContract deployed to:", await bookingContract.getAddress());
+  const voting = await Voting.deploy([
+    "Alice",
+    "Bob",
+    "Charlie"
+  ]);
+
+  await voting.waitForDeployment();
+
+  console.log("VotingContract deployed to:", await voting.getAddress());
 }
-main()
-  .then(() => process.exit(0))
-  .catch((error) => {
-    console.error(error);
-    process.exit(1);
-  });
+
+main().catch((error) => {
+  console.error(error);
+  process.exit(1);
+});
