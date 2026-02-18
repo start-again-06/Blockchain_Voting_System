@@ -1,0 +1,11 @@
+# Hardhat framework
+npm install --save-dev hardhat
+
+# Ethereum interaction & testing
+npm install --save-dev @nomicfoundation/hardhat-toolbox @nomiclabs/hardhat-ethers ethers
+
+# Environment variables
+npm install dotenv
+
+# Optional: OpenZeppelin contracts
+npm install @openzeppelin/contracts
