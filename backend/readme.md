@@ -63,13 +63,16 @@ The backend follows a service-oriented and event-driven architecture optimized f
 
 ```mermaid
 flowchart TD
-    A[Frontend Requests] --> B[API Layer]
+    A[Frontend / Wallet] --> B[API Layer]
     B --> C[Service Layer]
     C --> D[Indexing Layer]
     D --> E[Blockchain Layer (ethers.js / web3.js)]
     D --> F[Database (Optional)]
-    B --> F
+    
+    %% Event flow from blockchain to indexing
     E -->|Smart Contract Events| D
+    
+    %% Data flow back to API layer
     F -->|Stored Data| B
     C -->|Aggregated Results| B
 ```
