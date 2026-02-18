@@ -1,0 +1,14 @@
+# Core
+npm install express cors dotenv
+
+# Blockchain interaction
+npm install ethers
+
+# Database (optional)
+npm install mongoose pg
+
+# Utilities
+npm install axios morgan
+
+# Development tools
+npm install --save-dev nodemon
