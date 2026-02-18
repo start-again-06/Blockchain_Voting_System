@@ -1,0 +1,18 @@
+# Core
+npm install react react-dom react-router-dom
+
+# TypeScript support
+npm install --save-dev typescript @types/react @types/react-dom @types/react-router-dom
+
+# Styling
+npm install tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+
+# Web3 / Ethereum interaction
+npm install ethers web3modal
+
+# State management (optional but recommended)
+npm install zustand
+
+# Utilities
+npm install axios
