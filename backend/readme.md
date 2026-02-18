@@ -66,8 +66,8 @@ flowchart TD
     A[Frontend / Wallet] --> B[API Layer]
     B --> C[Service Layer]
     C --> D[Indexing Layer]
-    D --> E[Blockchain Layer (ethers.js / web3.js)]
-    D --> F[Database (Optional)]
+    D --> E[Blockchain Layer - ethers.js / web3.js]
+    D --> F[Database]
     
     %% Event flow from blockchain to indexing
     E -->|Smart Contract Events| D
