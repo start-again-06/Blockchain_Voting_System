@@ -1,33 +1,32 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
-contract BookingContract {
 
+contract BookingContract {
     address public owner;
+    uint256 public bookingFee = 0.01 ether;
 
     struct Booking {
         address user;
         string details;
         uint256 timestamp;
     }
-    function createBooking(string memory _details) public {
-        bookings.push(
-            Booking({
-                user: msg.sender,
-                details: _details,
-                timestamp: block.timestamp
-            })
-        );
-    }
-    function getTotalBookings() public view returns (uint256) {
-        return bookings.length;
+
+    Booking[] public bookings;
+
+    constructor() {
+        owner = msg.sender;
     }
 
-    function getBooking(uint256 index) public view returns (
-        address,
-        string memory,
-        uint256
-    ) {
-        Booking memory b = bookings[index];
-        return (b.user, b.details, b.timestamp);
+    function createBooking(string memory _details) public payable {
+        require(msg.value == bookingFee, "Incorrect ETH amount");
+
+        bookings.push(
+            Booking(msg.sender, _details, block.timestamp)
+        );
+    }
+
+    function withdraw() public {
+        require(msg.sender == owner, "Not owner");
+        payable(owner).transfer(address(this).balance);
     }
 }
